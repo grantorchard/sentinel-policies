@@ -12,3 +12,7 @@ check_resource_types = rule {
     res.type in whitelisted_resources
   }
 }
+
+main = rule {
+  check_resource_types
+}
