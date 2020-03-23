@@ -1,0 +1,14 @@
+import "tfplan/v2" as tfplan
+
+whitelisted_providers = ["vra"]
+
+check_providers = rule {
+  all tfplan.resource_changes as _, rc {
+    print("Checking provider for resource", rc.address, "in whitelisted providers:") and
+    rc.provider_name in whitelisted_providers
+  }
+}
+
+main = rule {
+    check_providers
+}
