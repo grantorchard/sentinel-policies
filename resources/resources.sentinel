@@ -1,0 +1,14 @@
+import "tfconfig/v2" as tfconfig
+
+whitelisted_resources = ["vra_cloud_account_vsphere"]
+
+resources = filter tfconfig.resources as _, res {
+  res.mode is "managed"
+}
+
+check_resource_types = rule {
+  all resources as _, res {
+    print("Checking if resource type", res.type, "in whitelisted_resources:", res.type in whitelisted_resources) and
+    res.type in whitelisted_resources
+  }
+}
